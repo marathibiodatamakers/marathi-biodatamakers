@@ -368,13 +368,7 @@ body { font-family: var(--font-dev); background: #f7f0e6; color: var(--text); mi
   box-shadow: 0 2px 20px rgba(0,0,0,0.3);
 }
 body {
-  padding-top: 70px;
-}
-@media (max-width: 600px) {
-  body { padding-top: 110px; }
-}
-@media (max-width: 420px) {
-  body { padding-top: 120px; }
+  padding-top: var(--header-h, 70px);
 }
 .header-inner {
   max-width: 1200px; margin: 0 auto; padding: 12px 24px;
@@ -1866,6 +1860,33 @@ img, video, iframe, embed, object { max-width: 100%; }
     </div>
   </div>
 </header>
+<script>
+/* Dynamically match body padding-top to the REAL rendered height of the
+   fixed header, so there is never a gap (header shorter than reserved
+   space) or overlap (header taller than reserved space) on any screen
+   size — phones, tablets, laptops, desktops. Runs immediately (not on
+   DOMContentLoaded) to avoid any flash, and keeps re-checking whenever
+   the header's own size changes (font load, step-pill wrap, orientation
+   change, browser zoom, window resize, etc). */
+(function () {
+  var header = document.querySelector('.site-header');
+  if (!header) return;
+  function syncHeaderHeight() {
+    var h = header.getBoundingClientRect().height;
+    document.documentElement.style.setProperty('--header-h', h + 'px');
+  }
+  syncHeaderHeight();
+  window.addEventListener('resize', syncHeaderHeight);
+  window.addEventListener('orientationchange', syncHeaderHeight);
+  window.addEventListener('load', syncHeaderHeight);
+  if (window.ResizeObserver) {
+    new ResizeObserver(syncHeaderHeight).observe(header);
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(syncHeaderHeight);
+  }
+})();
+</script>
 
 <div class="hero">
   <div class="hero-particles" aria-hidden="true">
