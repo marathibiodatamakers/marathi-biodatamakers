@@ -1,5 +1,5 @@
 # ════════════════════════════════════════════════
-#  robots.txt — marathibiodatamakers.onrender.com
+#  robots.txt — marathi-biodatamakers.onrender.com
 # ════════════════════════════════════════════════
 
 # Googlebot — full access, no delay
@@ -20,4 +20,4 @@ Disallow: /?q=
 Disallow: /cdn-cgi/
 Crawl-delay: 2
 
-Sitemap: https://marathibiodatamakers.onrender.com/sitemap.xml
+Sitemap: https://marathi-biodatamakers.onrender.com/sitemap.xml
