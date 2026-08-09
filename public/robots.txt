@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://marathi-biodatamakers.onrender.com/sitemap.xml
